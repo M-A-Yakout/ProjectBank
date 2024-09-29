@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Database.DatabaseHelper;
+import com.example.myapplication.Database.FirebaseRealtimeDatabaseHelper; // Add this import
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView signupText;
     private DatabaseHelper databaseHelper;
     private FirebaseAuth auth;
+    private FirebaseRealtimeDatabaseHelper firebaseDatabaseHelper; // Add this variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         signupText = findViewById(R.id.signupText);
         databaseHelper = new DatabaseHelper(this);
         auth = FirebaseAuth.getInstance();
+        firebaseDatabaseHelper = new FirebaseRealtimeDatabaseHelper(); // Initialize Firebase helper
 
         // Set text color to white for both EditTexts
         emailLogin.setTextColor(Color.WHITE);
@@ -109,6 +112,15 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
                             intent.putExtra("EMAIL", email);
                             intent.putExtra("CARD_NUMBER", cardNumber); // Pass card number to AccountActivity
+
+                            // Save the card information in Firebase if the user has just logged in
+                            String currency = "USD"; // Assume default currency or retrieve from user input
+                            String cardHolderName = "Default Holder"; // You can prompt user for name in future
+                            String cvv = generateRandomCVV(); // Generate a random CVV
+                            String expiryDate = generateExpiryDate(); // Generate expiry date
+
+                            firebaseDatabaseHelper.addCard(email, cardNumber, currency, cardHolderName, cvv, expiryDate); // Save card details
+
                             startActivity(intent);
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                         } else {
@@ -120,6 +132,14 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(this, "Login failed: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private String generateRandomCVV() {
+        return String.format("%03d", (int) (Math.random() * 1000)); // Generate a random 3-digit CVV
+    }
+
+    private String generateExpiryDate() {
+        return "12/25"; // For example, set a static expiry date or generate a random future date
     }
 
     // Method to change color of the "Sign up" part of the signupText TextView

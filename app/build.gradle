@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-
 }
 
 // Apply the Google Services plugin at the bottom of the file
@@ -87,19 +86,8 @@ dependencies {
         implementation 'com.google.firebase:firebase-auth'
         implementation 'com.google.firebase:firebase-firestore'
 
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1' // أو أحدث
-    implementation 'androidx.cardview:cardview:1.0.0' // تأكد من أنك تستخدم أحدث نسخة
-    implementation 'com.google.firebase:firebase-database:20.3.0' // أو أحدث
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.5.1'
+        implementation 'androidx.lifecycle:lifecycle-viewmodel:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1'
-
-
-        implementation 'androidx.appcompat:appcompat:1.6.1' // أو أحدث
-        implementation 'androidx.cardview:cardview:1.0.0' // تأكد من أنك تستخدم أحدث نسخة
-        implementation 'com.google.firebase:firebase-database:20.3.0' // أو أحدث
-
-
 
 
 

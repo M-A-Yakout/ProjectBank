@@ -1,4 +1,4 @@
-package com.example.myapplication.ClassDB;
+package com.example.myapplication.ClassActivity;
 
 public class CardDetails {
     private String cardNumber;

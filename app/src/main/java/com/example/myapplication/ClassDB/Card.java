@@ -3,16 +3,20 @@ package com.example.myapplication.ClassDB;
 public class Card {
     private String cardNumber;
     private String currency;
-    private String cardHolderName;
-    private String cvv;
-    private String expiryDate;
+    private String cardHolderName; // Add card holder name field
+    private String cvv; // Add CVV field
+    private String expiryDate; // Add expiry date field
+
+    // Default constructor required for calls to DataSnapshot.getValue(Card.class)
+    public Card() {
+    }
 
     public Card(String cardNumber, String currency, String cardHolderName, String cvv, String expiryDate) {
         this.cardNumber = cardNumber;
         this.currency = currency;
-        this.cardHolderName = cardHolderName;
-        this.cvv = cvv;
-        this.expiryDate = expiryDate;
+        this.cardHolderName = cardHolderName; // Initialize card holder name
+        this.cvv = cvv; // Initialize CVV
+        this.expiryDate = expiryDate; // Initialize expiry date
     }
 
     public String getCardNumber() {
@@ -23,15 +27,15 @@ public class Card {
         return currency;
     }
 
-    public String getCardHolderName() {
+    public String getCardHolderName() { // Getter for card holder name
         return cardHolderName;
     }
 
-    public String getCvv() {
+    public String getCvv() { // Getter for CVV
         return cvv;
     }
 
-    public String getExpiryDate() {
+    public String getExpiryDate() { // Getter for expiry date
         return expiryDate;
     }
 }

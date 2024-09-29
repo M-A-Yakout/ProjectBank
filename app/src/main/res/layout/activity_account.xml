@@ -181,7 +181,6 @@
         android:layout_below="@id/currencyButton"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="127dp"
-        android:backgroundTint="#2567F9"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="29dp"

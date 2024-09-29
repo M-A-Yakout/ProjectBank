@@ -1,6 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
+    // Google Services plugin (version updated for stability)
     id("com.google.gms.google-services") version "4.4.2" apply false
-alias(libs.plugins.android.application) apply false
+
+    // Alias for Android application plugin
+    alias(libs.plugins.android.application) apply false
+
+    // SonarQube plugin for code quality analysis
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
+
+// SonarQube Configuration
+sonarqube {
+    properties {
+        property "sonar.projectKey", "james-tiger_ProjectBank" // Your SonarCloud project key
+        property "sonar.organization", "james-tiger" // Your SonarCloud organization
+        property "sonar.host.url", "https://sonarcloud.io" // SonarCloud URL
+        // Add additional properties as needed, e.g., source directories, exclusions, etc.
+    }
+}

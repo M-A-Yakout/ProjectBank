@@ -1,19 +1,20 @@
 package com.example.myapplication.Database;
 
 import com.example.myapplication.ClassDB.Card;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FirebaseRealtimeDatabaseHelper {
-    private DatabaseReference cardsRef;
+    private final DatabaseReference cardsRef;
 
     public FirebaseRealtimeDatabaseHelper() {
+        // Initialize the database reference to the "cards" node
         cardsRef = FirebaseDatabase.getInstance().getReference("cards");
     }
 

@@ -26,11 +26,17 @@
             android:name=".SplashScreen.OnboardingActivity1"
             android:exported="false" />
         <activity
+            android:name=".SplashScreen.view1"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".ClassActivity.CurrencySelectionActivity"
             android:exported="false" />
+        <activity
+            android:name=".AddAccountActivity"
+            android:exported="false" /> <!-- Meta-data to specify OpenGL ES version -->
         <meta-data
             android:name="com.google.android.opengles"
             android:value="2.0" /> <!-- Use "3.0" if your app requires OpenGL ES 3.0 -->
@@ -50,7 +56,13 @@
             android:name=".ClassActivity.AccountActivity"
             android:exported="false" />
         <activity
+            android:name=".TransferMoneyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClassDB.MyApplication"
+            android:exported="false" />
+        <activity
+            android:name=".BankingActivity"
             android:exported="false" />
         <activity
             android:name=".ClassActivity.LoginActivity"
