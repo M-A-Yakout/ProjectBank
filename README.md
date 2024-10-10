@@ -1,1 +1,2 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f0cbbd28589a4271b6e9ad1047111df2)](https://app.codacy.com/gh/james-tiger/ProjectBank?utm_source=github.com&utm_medium=referral&utm_content=james-tiger/ProjectBank&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6ecec65f123f485d9bb96cae6bc891e0)](https://app.codacy.com/gh/james-tiger/ProjectBank/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
