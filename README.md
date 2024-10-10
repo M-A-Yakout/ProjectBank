@@ -1,0 +1,1 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6ecec65f123f485d9bb96cae6bc891e0)](https://app.codacy.com/gh/james-tiger/ProjectBank/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
