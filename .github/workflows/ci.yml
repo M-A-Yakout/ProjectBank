@@ -1,93 +1,62 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+# This workflow will build an Android project using Gradle and Java 17.
+# It will run on every push to the main branch and pull requests.
 
-name: Soot CI
+name: Build Android Project
+
+# Trigger this workflow on push and pull request events
 on:
   push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  StyleAndLicense:
-    name: Check style´and license conformity
+  build:
+    # Define the environment
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Use Java 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: '8'
-      - name: Stylecheck
-        if: always()
-        run: |
-          mvn -B clean checkstyle:check -Dcheckstyle.failOnViolation=true
-      - name: Licensecheck
-        if: always()
-        run: |
-          mvn -B clean license:check-file-header -Dlicence-check.failOnMissingHeader=true
     
-  BuildAndTest:
-    name: Build and Test with java ${{ matrix.java_version }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java_version: ['8', '9', '11']
-
+    # Define the steps to run
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Use Java ${{ matrix.java_version }}
-      uses: actions/setup-java@v1
-      with:
-        java-version: ${{ matrix.java_version }}
-    - name: Build and test Java ${{ matrix.java_version }}
-      run: |
-        mvn -B clean test -PJava${{ matrix.java_version }}
-
-        
-  DeployArtifacts:
-    name: Deploy artifacts to Maven Central
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/umbrella'
-    needs: [BuildAndTest]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Use Java 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: '8'
-      - name: Deploy artifacts
-        uses: samuelmeuli/action-maven-publish@v1
-        with:
-          gpg_private_key: ${{ secrets.gpg_private_key }}
-          gpg_passphrase: ${{ secrets.gpg_passphrase }}
-          nexus_username: ${{ secrets.nexus_username }}
-          nexus_password: ${{ secrets.nexus_password }}
-          maven_args: "-DskipTests -Dcheckstyle.failOnViolation=true"
+    
+    # 1. Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
       
-      # has to happen in same job, so that the documention was already created (would require another checkout and maven run otherwise)
-      - name: Get Version
-        id: version
-        run: echo ::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+    # 2. Set up Java 17 (required for Android projects)
+    - name: Setup Java 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: 17
 
-      - name: Organize documentation files for upload
-        shell: bash
-        env:
-          docdir: ./build/docs
-        run: |
-          export releasedir=${docdir}/${{ steps.version.outputs.version }} # env variables cannot contain other env variables
-          mkdir -p ${releasedir}/jdoc
-          unzip ./target/sootclasses-trunk-javadoc.jar -d ${releasedir}/jdoc/
-          mkdir -p ${releasedir}/options
-          cp ./doc/soot_options.html ${releasedir}/options/
-          cp ./doc/soot_options.css ${releasedir}/options/
-          cp ./doc/index.html ${docdir}/
+    # 3. Cache Gradle dependencies to improve workflow performance
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
 
+    # 4. Install Gradle (if not already available)
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
 
-      - name: Deploy JavaDoc to GH pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/ # The folder the action should deploy.
-          clean: false # Do not remove existing files in gh-pages
+    # 5. Run Gradle build task to build the Android project
+    - name: Build the project with Gradle
+      run: ./gradlew build
+
+    # 6. Run tests after build
+    - name: Run tests with Gradle
+      run: ./gradlew test
+
+    # 7. Archive build artifacts
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-build-artifacts
+        path: app/build/outputs/
