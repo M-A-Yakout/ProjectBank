@@ -1,9 +1,5 @@
-# This workflow will build an Android project using Gradle and Java 17.
-# It will run on every push to the main branch and pull requests.
-
 name: Build Android Project
 
-# Trigger this workflow on push and pull request events
 on:
   push:
     branches:
@@ -14,49 +10,50 @@ on:
 
 jobs:
   build:
-    # Define the environment
     runs-on: ubuntu-latest
-    
-    # Define the steps to run
+
     steps:
-    
-    # 1. Checkout the code from the repository
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    # 2. Set up Java 17 (required for Android projects)
-    - name: Setup Java 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: 17
+      # 1. Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    # 3. Cache Gradle dependencies to improve workflow performance
-    - name: Cache Gradle dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+      # 2. Set up Java 17
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
 
-    # 4. Install Gradle (if not already available)
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v4
+      # 3. Cache Gradle dependencies
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    # 5. Run Gradle build task to build the Android project
-    - name: Build the project with Gradle
-      run: ./gradlew build
+      # 4. Make Gradle wrapper executable
+      - name: Grant execute permission to gradlew
+        run: chmod +x gradlew
 
-    # 6. Run tests after build
-    - name: Run tests with Gradle
-      run: ./gradlew test
+      # 5. Setup Gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-    # 7. Archive build artifacts
-    - name: Archive build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: android-build-artifacts
-        path: app/build/outputs/
+      # 6. Run Gradle build task
+      - name: Build the project with Gradle
+        run: ./gradlew build
+
+      # 7. Run tests with Gradle
+      - name: Run tests with Gradle
+        run: ./gradlew test
+
+      # 8. Archive build artifacts
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-build-artifacts
+          path: app/build/outputs/
