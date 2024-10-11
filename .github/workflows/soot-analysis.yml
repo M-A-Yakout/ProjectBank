@@ -1,32 +1,22 @@
-name: Analyze with Soot
+name: Soot Analysis
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
-  analyze:
+  analysis:
     runs-on: ubuntu-latest
 
     steps:
-      # تحميل مستودع الكود
-      - name: Checkout Code
+      - name: Checkout the repository
         uses: actions/checkout@v4
 
-      # إعداد Java 17
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: temurin
-
-      # تحميل Soot من GitHub
-      - name: Download Soot
+      - name: Install Soot
         run: |
-          wget https://github.com/soot-oss/soot/releases/download/v4.2.1/soot-4.2.1.jar -P /home/runner/soot/
+          wget https://github.com/soot-oss/soot/releases/download/v4.2.1/soot-4.2.1-jar-with-dependencies.jar -P /home/runner/soot/
 
-      # تحليل الكود باستخدام Soot
-      - name: Analyze with Soot
+      - name: Run Soot Analysis
         run: |
-          java -jar /home/runner/soot/soot-4.2.1.jar -cp ./build/classes -output-dir ./soot-output --cfg
+          java -jar /home/runner/soot/soot-4.2.1-jar-with-dependencies.jar -cp /path/to/your/classes -src-prec class -d /home/runner/soot-output
