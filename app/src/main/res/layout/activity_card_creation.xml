@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#161622"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:background="@drawable/inputrest"
+        android:id="@+id/editTextCardHolder"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:hint="Card Holder Name" />
+
+    <Spinner
+        android:background="@drawable/inputrest"
+        android:id="@+id/spinnerCardType"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:background="@drawable/inputrest"
+        android:id="@+id/editTextInitialBalance"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:hint="Initial Balance" />
+
+    <Button
+        android:id="@+id/buttonCreateCard"
+        android:backgroundTint="#0066FF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Card" />
+</LinearLayout>

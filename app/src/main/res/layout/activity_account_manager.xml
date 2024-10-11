@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="البريد الإلكتروني" />
+
+    <EditText
+        android:id="@+id/editTextCurrency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="العملة (USD, GBP, SAR)"
+        android:layout_below="@id/editTextEmail" />
+
+    <EditText
+        android:id="@+id/editTextInitialBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="الرصيد الابتدائي"
+        android:layout_below="@id/editTextCurrency" />
+
+    <Button
+        android:id="@+id/buttonCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="إنشاء حساب"
+        android:layout_below="@id/editTextInitialBalance" />
+
+    <EditText
+        android:id="@+id/editTextFromCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="رقم الكارت من"
+        android:layout_below="@id/buttonCreateAccount" />
+
+    <EditText
+        android:id="@+id/editTextToCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="رقم الكارت إلى"
+        android:layout_below="@id/editTextFromCard" />
+
+    <EditText
+        android:id="@+id/editTextTransferAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="المبلغ المراد تحويله"
+        android:layout_below="@id/editTextToCard" />
+
+    <Button
+        android:id="@+id/buttonTransferMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تحويل الأموال"
+        android:layout_below="@id/editTextTransferAmount" />
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonTransferMoney"
+        android:textColor="#FF0000"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>
