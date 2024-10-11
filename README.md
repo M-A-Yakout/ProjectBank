@@ -1,1 +1,1 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6ecec65f123f485d9bb96cae6bc891e0)](https://app.codacy.com/gh/james-tiger/ProjectBank/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=james-tiger_ProjectBank)](https://sonarcloud.io/summary/new_code?id=james-tiger_ProjectBank)
