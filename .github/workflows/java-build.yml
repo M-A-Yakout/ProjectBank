@@ -1,20 +1,42 @@
-name: Build
+name: Build and CodeQL Analysis
 
 on:
   push:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write  # Required for CodeQL analysis
+
     steps:
     - name: Checkout sources
       uses: actions/checkout@v4
+
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: 17
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
+
     - name: Build with Gradle
       run: ./gradlew build
+
+    # CodeQL Analysis
+    - name: Set up CodeQL
+      uses: github/codeql-action/setup@v3
+      with:
+        languages: 'java'  # You can add more languages if needed
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: 'java'
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
