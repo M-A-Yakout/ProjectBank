@@ -3,13 +3,14 @@ plugins {
     // Google Services plugin (version updated for stability)
     id("com.google.gms.google-services") version "4.4.2" apply false
 
-    // Alias for Android application plugin
+    // Android application plugin
     alias(libs.plugins.android.application) apply false
 
     // SonarQube plugin for code quality analysis
     id "org.sonarqube" version "4.4.1.3373"
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.google.firebase.crashlytics) apply false
 }
-
 
 // SonarQube Configuration
 sonarqube {
@@ -18,5 +19,13 @@ sonarqube {
         property "sonar.organization", "james-tiger" // Your SonarCloud organization
         property "sonar.host.url", "https://sonarcloud.io" // SonarCloud URL
         // Add additional properties as needed, e.g., source directories, exclusions, etc.
+    }
+}
+
+allprojects {
+    repositories {
+        google()  // Google repository
+        mavenCentral()  // Maven Central
+        jcenter()  // JCenter (Deprecated, use MavenCentral if possible)
     }
 }
