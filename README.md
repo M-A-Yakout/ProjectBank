@@ -28,7 +28,7 @@ To get started with Project Bank, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/ProjectBank-main.git
+   git clone https://github.com/M-A-Yakout/ProjectBank.git
    ```
 2. **Open in Android Studio**:
    - Launch Android Studio and select `Open an existing Android Studio project`.
@@ -46,7 +46,3 @@ To get started with Project Bank, follow these steps:
 ## 🤝 Contributing
 
 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request. Let's make Project Bank even better together.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
