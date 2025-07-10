@@ -15,8 +15,8 @@ plugins {
 // SonarQube Configuration
 sonarqube {
     properties {
-        property "sonar.projectKey", "james-tiger_ProjectBank" // Your SonarCloud project key
-        property "sonar.organization", "james-tiger" // Your SonarCloud organization
+        property "sonar.projectKey", "" // Your SonarCloud project key
+        property "sonar.organization", "" // Your SonarCloud organization
         property "sonar.host.url", "https://sonarcloud.io" // SonarCloud URL
         // Add additional properties as needed, e.g., source directories, exclusions, etc.
     }
